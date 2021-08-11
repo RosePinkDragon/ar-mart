@@ -40,7 +40,21 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/product-details", (req, res) => {
-  res.render("product_details",{title: "Product Details"});
+
+  Product.find(function (err, products) {
+    if (err) {
+      console.log(err);
+    } else {
+      products.forEach((product) => {
+        res.render("product_details", { product: product });
+      });
+      mongoose.connection.close();
+    }
+  });
+  
+
+
+  
 });
 
 app.get("/about", (req, res) => {
@@ -54,3 +68,27 @@ app.get("/create", (req, res) => {
 app.use((req, res) => {
   res.status(404).render("404", { title: "Lost Page" });
 });
+
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please enter fruit name as well!"], //Data Validation
+  },
+  description: {
+    type: String,
+  },
+  cost: String,
+  availability: String,
+});
+
+// const oppoPhone = new Product({
+//   name: "Oppo A92s",
+//   description: "Times Now Oppo phones | Oppo A92s is the new 5G mid-ranger with 48-megapixel square-shaped camera bump",
+//   cost: "19,400",
+//   availability: "In stock"
+// })
+
+// oppoPhone.save(); //to save one doc only
+
+const Product = mongoose.model("Product", productSchema);
+
