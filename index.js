@@ -39,6 +39,10 @@ app.get("/home", (req, res) => {
   res.redirect("/");
 });
 
+app.get("/product-details", (req, res) => {
+  res.render("product_details",{title: "Product Details"});
+});
+
 app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });

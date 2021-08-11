@@ -1,0 +1,19 @@
+#productSection{
+    height: 100vh;
+}
+
+.product-image{
+    width: 250px;
+    height: 250px;
+}
+
+
+.availability{
+    color: #007600!important;
+    font-weight: bold;
+}
+
+.price{
+    color: #B12704!important;
+    font-weight: bold;
+}
